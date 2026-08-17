@@ -27,6 +27,7 @@ export const routes: RouteObject[] = [
   { path: '/the-supreme-god', element: <ContentPage slug="the-supreme-god" /> },
   { path: '/mahaprasad', element: <ContentPage slug="mahaprasad" /> },
   { path: '/about-the-temple', element: <ContentPage slug="about-the-temple" /> },
+  { path: '/temple-construction', element: <ContentPage slug="temple-construction" /> },
   { path: '/location', element: <ContentPage slug="location" /> },
   { path: '/contact', element: <ContentPage slug="contact" /> },
 

@@ -72,6 +72,7 @@ CAUSE_LABELS = {
     "rath_yatra": "Rath Yatra Fund",
     "seva": "Nitya Seva / Puja",
     "annaprasad": "Annaprasad Booking",
+    "temple_construction": "New Temple Construction Fund",
 }
 
 

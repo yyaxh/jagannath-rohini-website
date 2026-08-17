@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Heart, User, Phone, Mail, FileText, Home, IndianRupee, Construction } from 'lucide-react';
 import { useRazorpay } from '../lib/useRazorpay';
 import { createDonation, getPublicConfig, verifyDonation, getSiteSettings, type SiteSettings } from '../lib/api';
@@ -10,9 +11,15 @@ const CAUSES = [
   { value: 'rath_yatra', label: 'Rath Yatra Fund' },
   { value: 'seva', label: 'Nitya Seva / Puja' },
   { value: 'annaprasad', label: 'Annaprasad Booking' },
+  { value: 'temple_construction', label: 'New Temple Construction Fund' },
 ];
 
 export default function DonatePage() {
+  const [searchParams] = useSearchParams();
+  // Deep-link support: /donate?cause=temple_construction preselects the cause.
+  const initialCause = CAUSES.some((c) => c.value === searchParams.get('cause'))
+    ? (searchParams.get('cause') as string)
+    : 'general';
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [form, setForm] = useState({
@@ -21,7 +28,7 @@ export default function DonatePage() {
     donor_email: '',
     donor_pan: '',
     address: '',
-    cause: 'general',
+    cause: initialCause,
     amount: 501,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});

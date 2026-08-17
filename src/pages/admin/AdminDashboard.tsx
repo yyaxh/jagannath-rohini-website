@@ -15,6 +15,7 @@ import {
   type SiteSettings, type SocietyMembershipRow, type DainikSewaRow,
 } from '../../lib/api';
 import { DEFAULT_SITE_CONTENT, CONTENT_BLOCK_LABELS, refreshSiteContent } from '../../lib/siteContent';
+import SiteContentEditor from './SiteContentEditor';
 
 type Tab = 'membership' | 'seva' | 'gallery' | 'announcements' | 'documents' | 'live' | 'branding' | 'blog' | 'content';
 
@@ -341,8 +342,8 @@ export default function AdminDashboard() {
 
   // site content (the site ships with hardcoded defaults; admin can override
   // any block here and the public pages pick it up)
-  const [contentBlockKey, setContentBlockKey] = useState<string>('hero_slides');
-  const [contentDrafts, setContentDrafts] = useState<Record<string, string>>({});
+  const [contentBlockKey, setContentBlockKey] = useState<string>('content_pages');
+  const [savedContent, setSavedContent] = useState<Record<string, unknown>>({});
 
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState('');
@@ -407,7 +408,8 @@ export default function AdminDashboard() {
     })();
   }, [refreshSubmissions, refreshGallery, refreshAnnouncements, refreshDocuments, refreshSettings, fetchBlogPosts]);
 
-  // Load current effective site content (admin override, else built-in default)
+  // Load current site content overrides (blocks the admin has saved). Any
+  // block missing here falls back to the built-in default on the public site.
   useEffect(() => {
     (async () => {
       let saved: Record<string, unknown> = {};
@@ -416,12 +418,7 @@ export default function AdminDashboard() {
       } catch {
         // backend down — fall back to pure defaults below
       }
-      const drafts: Record<string, string> = {};
-      for (const key of Object.keys(CONTENT_BLOCK_LABELS)) {
-        const value = key in saved ? saved[key] : DEFAULT_SITE_CONTENT[key];
-        drafts[key] = JSON.stringify(value ?? null, null, 2);
-      }
-      setContentDrafts(drafts);
+      setSavedContent(saved || {});
     })();
   }, []);
 
@@ -552,21 +549,34 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleSaveContentBlock = async () => {
-    const raw = contentDrafts[contentBlockKey] ?? '';
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(raw);
-    } catch {
-      return alert(`Invalid JSON in this block. Check the formatting and try again.`);
-    }
+  const handleSaveContentBlock = async (key: string, value: unknown) => {
     setBusy(true);
     try {
-      await updateSiteContent({ [contentBlockKey]: parsed });
+      await updateSiteContent({ [key]: value });
       await refreshSiteContent();
-      flash(`Saved: ${CONTENT_BLOCK_LABELS[contentBlockKey]}`);
+      setSavedContent((s) => ({ ...s, [key]: value }));
+      flash(`Saved: ${CONTENT_BLOCK_LABELS[key]}`);
     } catch (err: any) {
       alert(err.message || 'Save failed');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleResetContentBlock = async (key: string) => {
+    if (!confirm(`Reset "${CONTENT_BLOCK_LABELS[key]}" to its default content?`)) return;
+    setBusy(true);
+    try {
+      await updateSiteContent({ [key]: null });
+      await refreshSiteContent();
+      setSavedContent((s) => {
+        const next = { ...s };
+        delete next[key];
+        return next;
+      });
+      flash(`Reset to default: ${CONTENT_BLOCK_LABELS[key]}`);
+    } catch (err: any) {
+      alert(err.message || 'Reset failed');
     } finally {
       setBusy(false);
     }
@@ -991,14 +1001,18 @@ export default function AdminDashboard() {
 
         {tab === 'content' && (
           <div className="space-y-6">
-            <SectionCard title="Site Content (optional admin override)" badge="Defaults used until saved">
+            <SectionCard
+              title="Site Content"
+              badge={contentBlockKey in savedContent ? 'Custom content is live' : 'Using default content'}
+            >
               <p className="text-sm text-muted-foreground mb-4">
-                The website ships with built-in content for every section below. Pick a block, edit the JSON,
-                and save only when you want to change it — until then the default is shown on the site.
+                The website ships with built-in content. Pick a section below, edit it in the form (no JSON needed),
+                and click “Save changes” — it appears on the site immediately. Sections you haven’t saved keep the
+                built-in default.
               </p>
               <div className="space-y-4">
                 <div>
-                  <FieldLabel>Block</FieldLabel>
+                  <FieldLabel>Section</FieldLabel>
                   <select
                     className={inputCls}
                     value={contentBlockKey}
@@ -1009,35 +1023,23 @@ export default function AdminDashboard() {
                     ))}
                   </select>
                 </div>
-                <div>
-                  <FieldLabel>JSON — {CONTENT_BLOCK_LABELS[contentBlockKey]}</FieldLabel>
-                  <textarea
-                    className={`${inputCls} font-mono text-xs leading-relaxed`}
-                    rows={18}
-                    value={contentDrafts[contentBlockKey] ?? ''}
-                    onChange={(e) => setContentDrafts((d) => ({ ...d, [contentBlockKey]: e.target.value }))}
-                    spellCheck={false}
-                  />
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <button onClick={handleSaveContentBlock} disabled={busy} className={fileBtnCls}>
-                    Save this block
-                  </button>
-                  <button
-                    onClick={() => {
-                      const value = DEFAULT_SITE_CONTENT[contentBlockKey];
-                      setContentDrafts((d) => ({ ...d, [contentBlockKey]: JSON.stringify(value ?? null, null, 2) }));
-                    }}
-                    className="px-4 py-2 border border-gray-300 text-sm rounded-lg hover:bg-gray-50 transition"
-                  >
-                    Reset to default
-                  </button>
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  For &quot;Content Pages&quot;: keys are page slugs (e.g. <code className="bg-gray-100 px-1 rounded">about-the-temple</code>,
-                  <code className="bg-gray-100 px-1 rounded">history</code>). Only the pages you include are overridden — the rest keep
-                  their built-in text. Other blocks replace the whole section when saved.
-                </p>
+                {contentBlockKey in savedContent && (
+                  <p className="text-xs text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                    This section is currently customized. To go back to the built-in content, click “Reset to default”.
+                  </p>
+                )}
+                <SiteContentEditor
+                  key={contentBlockKey}
+                  blockKey={contentBlockKey}
+                  value={
+                    contentBlockKey in savedContent
+                      ? savedContent[contentBlockKey]
+                      : DEFAULT_SITE_CONTENT[contentBlockKey]
+                  }
+                  busy={busy}
+                  onSave={handleSaveContentBlock}
+                  onReset={handleResetContentBlock}
+                />
               </div>
             </SectionCard>
           </div>

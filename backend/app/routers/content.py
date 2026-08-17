@@ -171,6 +171,11 @@ def update_site_content(
         raise HTTPException(status_code=400, detail=f"Unknown content block(s): {', '.join(unknown)}")
     for key, value in payload.items():
         if value is None:
+            # null means "reset this block to the built-in default"
+            row = db.get(SiteSetting, f"content.{key}")
+            if row is not None:
+                db.delete(row)
+                db.commit()
             continue
         _set_setting(db, f"content.{key}", json.dumps(value))
     return site_content(db)

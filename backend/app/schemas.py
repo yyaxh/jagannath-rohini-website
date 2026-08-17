@@ -12,7 +12,7 @@ class DonationCreate(BaseModel):
     donor_email: EmailStr
     donor_pan: str | None = None
     address: str | None = Field(default=None, max_length=500)
-    cause: str = Field(pattern=r"^(general|annadaan|rath_yatra|seva|annaprasad)$")
+    cause: str = Field(pattern=r"^(general|annadaan|rath_yatra|seva|annaprasad|temple_construction)$")
     amount: float = Field(gt=0, le=1_000_000)  # sanity cap; adjust as needed
 
     @field_validator("donor_phone")
