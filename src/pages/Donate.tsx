@@ -14,6 +14,10 @@ const CAUSES = [
   { value: 'temple_construction', label: 'New Temple Construction Fund' },
 ];
 
+const MAP_EMBED_URL =
+  'https://maps.google.com/maps?q=place_id:0x390d01142857dfb5:0x311d3d7200922351&output=embed&z=16';
+const MAP_LINK_URL = 'https://maps.app.goo.gl/c3H7sspXVhM2U4Wo7?g_st=aw';
+
 export default function DonatePage() {
   const [searchParams] = useSearchParams();
   // Deep-link support: /donate?cause=temple_construction preselects the cause.
@@ -156,11 +160,27 @@ export default function DonatePage() {
         {settings?.under_construction && (
           <div className="rounded-xl bg-amber-50 border border-amber-300 p-4 flex items-start gap-3">
             <Construction className="w-6 h-6 text-amber-600 mt-0.5 shrink-0" />
-            <div>
+            <div className="flex-1">
               <p className="text-sm font-semibold text-amber-900">The temple is under construction</p>
               <p className="text-sm text-amber-800 mt-0.5">
                 {settings.donate_banner || 'Please donate any amount of your choice to help complete the temple. Every contribution counts. Jai Jagannath!'}
               </p>
+              <a
+                href={MAP_LINK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-amber-900 underline decoration-amber-500 underline-offset-2 mt-1 inline-block"
+              >
+                View construction site on Google Maps
+              </a>
+              <iframe
+                title="Jagannath Mandir construction site location"
+                src={MAP_EMBED_URL}
+                className="w-full h-56 mt-3 rounded-lg border border-amber-300"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </div>
           </div>
         )}
