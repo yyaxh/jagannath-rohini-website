@@ -66,7 +66,7 @@ export default function DocumentsPage() {
         <title>Government Documents & Certificates — Jagannath Mandir Rohini</title>
         <meta
           name="description"
-          content="Official documents and certificates of Jagannath Mandir Rohini and Sree Neelachala Seva Sangha — society registration, trust documents and more."
+          content="Official documents and certificates of Jagannath Mandir Rohini and Oriya Samaj — society registration, trust documents and more."
         />
       </Helmet>
 
@@ -75,7 +75,7 @@ export default function DocumentsPage() {
           Documents & Certificates
         </h1>
         <p className="text-muted-foreground mb-8">
-          Official documents of Jagannath Mandir, Rohini and Sree Neelachala Seva Sangha.
+          Official documents of Jagannath Mandir, Rohini and Oriya Samaj.
         </p>
 
         {loading && <p className="text-muted-foreground text-sm">Loading documents…</p>}

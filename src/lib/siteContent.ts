@@ -141,11 +141,11 @@ export const DEFAULT_SITE_CONTENT: Record<string, unknown> = {
 
   footer: {
     address: 'DAMB Apartments, Sector 11 Extn, Sector 11, Rohini, New Delhi 110085',
-    email: 'neelachalasevasangha@rediffmail.com',
-    email2: 'odiasamajrohini@gmail.com',
+    email: 'info@jagannathmandirrohini.com',
+    email2: '',
     prasadPhone: '7011510512',
-    phone1: '011-46015314',
-    phone2: '46015316',
+    phone1: '7011510512',
+    phone2: '',
     notice:
       'Dear Devotee, For unsuccessful orders we will share the QR code on your Whatsapp number to complete the transaction. Closing Time on Website for Day Prasad Booking 9:30 am and closing time for Night Prasad Booking 6:00 p.m. Our Whatsapp Agent will answer your queries between 9 a.m. to 10 a.m. and 5 p.m. to 6 p.m. Jai Jagannath 🙏',
   } as FooterContent,

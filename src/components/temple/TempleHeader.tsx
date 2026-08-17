@@ -52,19 +52,20 @@ export default function TempleHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-md">
-      <div className="bg-primary py-4 px-4">
+      {isHome && (
+      <div className="bg-primary py-2 px-4">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4 order-1 lg:order-none">
             <Link to="/" className="shrink-0">
               <img
                 src={logoPath}
                 alt="Jagannath Mandir Rohini"
-                className="h-20 lg:h-28 w-auto object-contain"
+                className="h-16 lg:h-20 w-auto object-contain"
                 loading="eager"
                 fetchPriority="high" />
             </Link>
             <div className="text-yellow-950">
-              <p className="text-base lg:text-lg font-bold leading-tight">Jagannath Mandir</p>
+              <p className="text-base lg:text-lg font-bold leading-tight">Shree Jagannath Mandir</p>
               <p className="text-xs lg:text-sm font-medium leading-snug">
                 Sector 11, Rohini, New Delhi
               </p>
@@ -85,24 +86,27 @@ export default function TempleHeader() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 order-3 lg:order-none">
-            <button
-              onClick={toggleMobile}
-              className="lg:hidden p-2 text-yellow-950"
-              aria-label="Toggle navigation menu"
+          <div className="hidden lg:flex items-center gap-2">
+            <Link
+              to="/donate"
+              className="bg-red-600 hover:bg-red-700 text-white text-base font-bold px-8 py-4 rounded-full shadow-sm"
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-            {isHome && (
-              <Link
-                to="/donate"
-                className="hidden lg:inline-block bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-3 rounded-full shadow-sm"
-              >
-                Donate Now
-              </Link>
-            )}
+              Donate Now
+            </Link>
           </div>
         </div>
+      </div>
+      )}
+
+      {/* Mobile menu toggle — on every page (orange bar is homepage-only) */}
+      <div className="bg-temple-dark lg:hidden px-4 py-2 flex items-center justify-between">
+        <button
+          onClick={toggleMobile}
+          className="p-2 text-white"
+          aria-label="Toggle navigation menu"
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
       <nav className="bg-temple-dark hidden lg:block">
@@ -179,7 +183,7 @@ export default function TempleHeader() {
               <Link
                 to="/donate"
                 onClick={toggleMobile}
-                className="mt-2 bg-red-600 text-white text-center text-sm font-bold px-4 py-2 rounded-full shadow-sm"
+                className="mt-2 bg-red-600 text-white text-center text-base font-bold px-4 py-3 rounded-full shadow-sm"
               >
                 Donate Now
               </Link>

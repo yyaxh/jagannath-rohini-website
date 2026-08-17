@@ -35,7 +35,7 @@ export const routes: RouteObject[] = [
   { path: '/history', element: <ContentPage slug="history" /> },
   { path: '/unique-saga', element: <ContentPage slug="unique-saga" /> },
 
-  // ---- Sree Neelachala Seva Sangha ----
+  // ---- Oriya Samaj ----
   { path: '/about-us', element: <ContentPage slug="about-us" /> },
   { path: '/trustees', element: <ContentPage slug="trustees" /> },
 

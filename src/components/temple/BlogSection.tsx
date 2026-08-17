@@ -1,8 +1,45 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSiteContent, type BlogCard } from '@/lib/siteContent';
+import { getBlogPosts, type BlogPost } from '@/lib/api';
+
+// Shown when a blog post has no cover image.
+const FALLBACK_IMAGE = '/airo-assets/images/hero/slide-1-rath-yatra.jpg';
+
+const toPlain = (md: string): string => md.replace(/[#*`>_\-\[\]()!]+/g, ' ').replace(/\s+/g, ' ').trim();
 
 export default function BlogSection() {
-  const posts = useSiteContent<BlogCard[]>('blog_cards');
+  const hardcoded = useSiteContent<BlogCard[]>('blog_cards');
+  const [latest, setLatest] = useState<BlogPost[] | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    getBlogPosts()
+      .then((posts) => {
+        if (active) setLatest(posts.slice(0, 3));
+      })
+      .catch(() => {
+        if (active) setLatest([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  // Published blog posts (if any) drive the homepage cards — the latest 3
+  // appear automatically. When there are none, the built-in cards are shown
+  // (admin can still override those via Site Content → Homepage Blog Cards).
+  const cards: { title: string; excerpt: string; image: string; href: string; key: string }[] =
+    latest && latest.length > 0
+      ? latest.map((p) => ({
+          key: p.id,
+          title: p.title,
+          excerpt: (p.excerpt || toPlain(p.content)).slice(0, 180),
+          image: p.cover_image || FALLBACK_IMAGE,
+          href: `/blog/${p.slug}`,
+        }))
+      : hardcoded.map((c) => ({ key: c.title, ...c }));
+
   return (
     <section className="py-12 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
@@ -23,9 +60,9 @@ export default function BlogSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {posts.map((post) => (
+          {cards.map((post) => (
             <div
-              key={post.title}
+              key={post.key}
               className="rounded-xl overflow-hidden shadow-md bg-card border border-border flex flex-col"
             >
               <div className="overflow-hidden h-48">

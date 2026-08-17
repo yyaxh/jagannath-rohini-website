@@ -36,8 +36,8 @@ class Settings(BaseSettings):
     YOUTUBE_API_KEY: str = ""
 
     # Trust / 80G details
-    TRUST_LEGAL_NAME: str = "Sree Neelachala Seva Sangha (Jagannath Mandir, Rohini)"
-    TRUST_ADDRESS: str = "A 3/16, Rohini Sector 7, New Delhi 110085"
+    TRUST_LEGAL_NAME: str = "Oriya Samaj (Regd. No. S/37924/2000)"
+    TRUST_ADDRESS: str = "DAMB Apartments, Sector 11 Extn, Sector 11, Rohini, New Delhi 110085"
     TRUST_PAN: str = "AAAAA0000A"
     TRUST_80G_REG_NO: str = "AAAAA0000A00000"
     TRUST_80G_VALID_FROM: str = "AY 2024-25"

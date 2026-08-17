@@ -51,8 +51,9 @@ Donation Details:
 - Date: {donation.updated_at.strftime('%d %B %Y') if donation.updated_at else donation.created_at.strftime('%d %B %Y')}
 
 With heartfelt gratitude,
-Sree Neelachala Seva Sangha (Jagannath Mandir, Rohini)
-A 3/16, Rohini Sector 7, New Delhi 110085
+Oriya Samaj (Regd. No. S/37924/2000) | Shree Jagannath Mandir Rohini
+DAMB Apartments, Sector 11 Extn, Sector 11, Rohini, New Delhi 110085
+Email: info@jagannathmandirrohini.com
 """
     msg.attach(MIMEText(body, "plain"))
 
@@ -84,8 +85,9 @@ Thank you for submitting your {form_type} request. We have received your details
 If you have any questions, please reach out to the temple office.
 
 With blessings,
-Sree Neelachala Seva Sangha (Jagannath Mandir, Rohini)
-A 3/16, Rohini Sector 7, New Delhi 110085
+Oriya Samaj (Regd. No. S/37924/2000) | Shree Jagannath Mandir Rohini
+DAMB Apartments, Sector 11 Extn, Sector 11, Rohini, New Delhi 110085
+Email: info@jagannathmandirrohini.com
 """
     msg.attach(MIMEText(body, "plain"))
 

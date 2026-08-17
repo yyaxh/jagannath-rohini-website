@@ -29,14 +29,14 @@ const jsonLd = {
         addressRegion: 'New Delhi',
         addressCountry: 'IN',
       },
-      telephone: '011-46015314',
-      email: 'neelachalasevasangha@rediffmail.com',
+      telephone: '+91-7011510512',
+      email: 'info@jagannathmandirrohini.com',
     },
     {
       '@type': 'WebPage',
       '@id': `${site}/#webpage`,
       url: `${site}/`,
-      name: 'Jagannath Mandir Rohini — Sree Neelachala Seva Sangha',
+      name: 'Jagannath Mandir Rohini — Oriya Samaj',
       isPartOf: { '@id': `${site}/#website` },
       about: { '@id': `${site}/#organization` },
       datePublished: '2023-04-01',
@@ -49,32 +49,32 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Jagannath Mandir Rohini — Rath Yatra 2026 | Sree Neelachala Seva Sangha</title>
+        <title>Shree Jagannath Mandir Rohini — Rath Yatra 2026 | Oriya Samaj, New Delhi</title>
         <meta
           name="description"
-          content="Welcome to Jagannath Mandir, Rohini, New Delhi. Book Annaprasad prasad, Rituals, and celebrate Rath Yatra 2026 on 16 July. Jai Jagannath!"
+          content="Welcome to Shree Jagannath Mandir, Rohini, New Delhi. Book Annaprasad prasad, Rituals, and celebrate Rath Yatra 2026 on 16 July. Jai Jagannath!"
         />
         <link rel="canonical" href={`${site}/`} />
-        <meta property="og:title" content="Jagannath Mandir Rohini — Rath Yatra 2026" />
+        <meta property="og:title" content="Shree Jagannath Mandir Rohini — Rath Yatra 2026" />
         <meta
           property="og:description"
-          content="Official site of Jagannath Mandir, Rohini, New Delhi. Annaprasad booking, Rituals, Rath Yatra 2026 and more."
+          content="Official site of Shree Jagannath Mandir, Rohini, New Delhi. Annaprasad booking, Rituals, Rath Yatra 2026 and more."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${site}/`} />
-        <meta property="og:image" content={`${site}/assets/images/14eb2b6be41412d466996d06b79de264.jpg`} />
+        <meta property="og:image" content={`${site}/airo-assets/images/hero/slide-1-rath-yatra.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Jagannath Mandir Rohini — Rath Yatra 2026" />
+        <meta name="twitter:title" content="Shree Jagannath Mandir Rohini — Rath Yatra 2026" />
         <meta
           name="twitter:description"
-          content="Official site of Jagannath Mandir, Rohini, New Delhi. Annaprasad booking, Rituals, Rath Yatra 2026 and more."
+          content="Official site of Shree Jagannath Mandir, Rohini, New Delhi. Annaprasad booking, Rituals, Rath Yatra 2026 and more."
         />
-        <meta name="twitter:image" content={`${site}/assets/images/14eb2b6be41412d466996d06b79de264.jpg`} />
+        <meta name="twitter:image" content={`${site}/airo-assets/images/hero/slide-1-rath-yatra.jpg`} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       <main>
-        <h1 className="sr-only">Jagannath Mandir Rohini — Sree Neelachala Seva Sangha, New Delhi</h1>
+        <h1 className="sr-only">Shree Jagannath Mandir Rohini — Oriya Samaj, New Delhi</h1>
         <AnnouncementsBar />
         <HeroCarousel />
         <LiveAartiBanner />

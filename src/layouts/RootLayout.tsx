@@ -9,12 +9,11 @@ export default function RootLayout() {
   return (
     <Website>
       <Helmet>
-        <title>Jagannath Mandir Rohini — Sree Neelachala Seva Sangha, New Delhi</title>
+        <title>Shree Jagannath Mandir Rohini — Oriya Samaj, New Delhi</title>
         <meta
           name="description"
-          content="Official website of Jagannath Mandir, Rohini, New Delhi. Book Annaprasad, Rituals, and stay updated on Rath Yatra 2026 and temple events."
+          content="Official website of Shree Jagannath Mandir, Rohini, New Delhi. Book Annaprasad, Rituals, Society Membership, and stay updated on Rath Yatra and temple events."
         />
-        <link rel="icon" href="/assets/other/d0ad580cca853845851f7ca483f01998.png" sizes="192x192" />
       </Helmet>
       <ScrollRestoration />
       <TempleHeader />
