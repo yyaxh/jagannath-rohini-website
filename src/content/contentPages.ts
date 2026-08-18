@@ -108,12 +108,6 @@ Our devotees' dream of a grand, permanent temple for Lord Jagannath is taking sh
 
 Once complete, the new temple will be a magnificent abode for Lord Jagannath, Balabhadra and Devi Subhadra — with daily rituals, festivals and community seva for generations of devotees to come.
 
-<p style="text-align:center;margin:24px 0">
-  <a href="https://maps.app.goo.gl/c3H7sspXVhM2U4Wo7?g_st=aw" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f97316;color:#ffffff;padding:12px 28px;border-radius:9999px;font-weight:700;text-decoration:none">📍 View on Google Maps</a>
-</p>
-
-<iframe src="https://www.google.com/maps?q=P4P3%2B633%20Jagannath%20Mandir%2C%20Sector%2011%2C%20Rohini%2C%20Delhi%20110085&output=embed" width="100%" height="400" style="border:0;border-radius:12px" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="New Temple Construction Location – Google Map"></iframe>
-
 ## How You Can Help
 
 Every contribution, big or small, brings the temple one step closer to completion. Your donation goes directly towards the construction of the new temple.
@@ -145,6 +139,12 @@ We would love to hear from you. For any queries, feedback, or seva bookings, ple
 
 **Jagannath Mandir Rohini**  
 DAMB Apartments, Sector 11 Extn, Sector 11, Rohini, New Delhi – 110085
+
+<p style="text-align:center;margin:24px 0">
+  <a href="https://maps.app.goo.gl/c3H7sspXVhM2U4Wo7?g_st=aw" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f97316;color:#ffffff;padding:12px 28px;border-radius:9999px;font-weight:700;text-decoration:none">📍 Get Directions – Open in Google Maps</a>
+</p>
+
+<iframe src="https://www.google.com/maps?q=P4P3%2B633%20Jagannath%20Mandir%2C%20Sector%2011%2C%20Rohini%2C%20Delhi%20110085&output=embed" width="100%" height="400" style="border:0;border-radius:12px" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Jagannath Mandir Rohini – Google Map"></iframe>
 
 ## Contact Details
 
