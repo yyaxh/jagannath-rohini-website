@@ -20,6 +20,24 @@ router = APIRouter(prefix="/api/donations", tags=["donations"])
 logger = logging.getLogger("donations")
 
 
+class DonationSnapshot:
+    """Lightweight copy of donation fields — survives session closure in BackgroundTask."""
+
+    def __init__(self, d):
+        self.id = d.id
+        self.donor_name = d.donor_name
+        self.donor_phone = d.donor_phone
+        self.donor_email = d.donor_email
+        self.donor_pan = d.donor_pan
+        self.address = d.address
+        self.cause = d.cause
+        self.amount = d.amount
+        self.receipt_number = d.receipt_number
+        self.razorpay_payment_id = d.razorpay_payment_id
+        self.created_at = d.created_at
+        self.updated_at = d.updated_at
+
+
 @router.post("", response_model=DonationOut, status_code=status.HTTP_201_CREATED)
 @limiter.limit(settings.RATE_LIMIT_DONATIONS)
 def create_donation(request: Request, payload: DonationCreate, db: Session = Depends(get_db)):
@@ -112,16 +130,15 @@ async def razorpay_webhook(request: Request, db: Session = Depends(get_db)):
         if not donation.receipt_number:
             donation.receipt_number = make_receipt_number(donation.id, donation.created_at)
         db.commit()
-        # Email the PDF receipt — object, never let a mail/PDF failure break
-        # the payment record. Runs as a background task so the webhook responds
-        # fast to Razorpay (which retries on slow/timeout responses).
+        # Snapshot donation fields BEFORE BackgroundTask so the receipt
+        # email works even after get_db closes the session.
+        snap = DonationSnapshot(donation)
         from starlette.background import BackgroundTask
-
         from fastapi.responses import JSONResponse
 
         return JSONResponse(
             content={"status": "ok", "receipt_email_scheduled": bool(settings.SMTP_FROM)},
-            background=BackgroundTask(_send_receipt_safe, donation),
+            background=BackgroundTask(_send_receipt_safe, snap),
         )
     elif event == "payment.failed":
         donation.status = DonationStatus.failed
@@ -130,14 +147,14 @@ async def razorpay_webhook(request: Request, db: Session = Depends(get_db)):
     return {"status": "ok"}
 
 
-def _send_receipt_safe(donation) -> None:
+def _send_receipt_safe(snap) -> None:
     """Background helper — never raises into the webhook response."""
     try:
-        ok = send_donation_receipt(donation, donation.donor_email)
+        ok = send_donation_receipt(snap, snap.donor_email)
         if not ok:
-            logger.warning("Receipt email failed for donation %s", donation.id)
+            logger.warning("Receipt email failed for donation %s", snap.id)
     except Exception:
-        logger.exception("Unexpected error sending receipt for donation %s", donation.id)
+        logger.exception("Unexpected error sending receipt for donation %s", snap.id)
 
 
 @router.get("/{donation_id}/receipt")
@@ -180,3 +197,26 @@ def list_donations(db: Session = Depends(get_db)):
         }
         for d in rows
     ]
+
+
+@router.get("/smtp-test", dependencies=[Depends(require_admin)])
+def smtp_test():
+    """Send a test email to verify SMTP credentials work. Admin only."""
+    import smtplib
+    from email.mime.text import MIMEText
+
+    if not (settings.SMTP_HOST and settings.SMTP_USER and settings.SMTP_PASS and settings.SMTP_FROM):
+        return {"ok": False, "error": "SMTP not fully configured. Check SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_FROM on Render."}
+    try:
+        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=15) as server:
+            server.starttls()
+            server.login(settings.SMTP_USER, settings.SMTP_PASS)
+            msg = MIMEText("This is a test email from Jagannath Mandir Rohini. If you see this, SMTP is working!")
+            msg["From"] = settings.SMTP_FROM
+            msg["To"] = settings.SMTP_FROM
+            msg["Subject"] = "JMR SMTP Test – Working!"
+            server.send_message(msg)
+        return {"ok": True, "message": f"Test email sent to {settings.SMTP_FROM}. Check inbox."}
+    except Exception as e:
+        logger.exception("SMTP test failed")
+        return {"ok": False, "error": str(e)}

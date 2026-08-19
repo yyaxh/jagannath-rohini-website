@@ -96,11 +96,16 @@ Email: info@jagannathmandirrohini.com
 
 def _send(msg: MIMEMultipart) -> bool:
     try:
+        logger.info("SMTP connecting to %s:%s as %s", settings.SMTP_HOST, settings.SMTP_PORT, settings.SMTP_USER)
         with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=15) as server:
             server.starttls()
             server.login(settings.SMTP_USER, settings.SMTP_PASS)
             server.send_message(msg)
+        logger.info("SMTP send OK to %s", msg.get("To"))
         return True
+    except smtplib.SMTPAuthenticationError:
+        logger.error("SMTP auth failed — check SMTP_USER and SMTP_PASS (use Gmail App Password, not login password)")
+        return False
     except Exception:
         logger.exception("SMTP send failed to %s", msg.get("To"))
         return False

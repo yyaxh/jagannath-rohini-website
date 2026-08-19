@@ -79,3 +79,102 @@ html { scroll-behavior: smooth; }
 .admin-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); }
 .admin-row { transition: background-color 0.15s ease; }
 .admin-row:hover { background-color: hsl(var(--muted) / 0.7); }
+
+/* ── Navbar animations ── */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes menuSlideDown {
+  from { max-height: 0; opacity: 0; }
+  to { max-height: 800px; opacity: 1; }
+}
+@keyframes menuSlideUp {
+  from { max-height: 800px; opacity: 1; }
+  to { max-height: 0; opacity: 0; }
+}
+@keyframes staggerIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.nav-dropdown {
+  animation: slideDown 0.2s ease-out both;
+  transform-origin: top center;
+}
+.nav-mobile-menu {
+  animation: menuSlideDown 0.3s ease-out both;
+  overflow: hidden;
+}
+.nav-mobile-menu-closing {
+  animation: menuSlideUp 0.25s ease-in both;
+  overflow: hidden;
+}
+.nav-stagger > * {
+  animation: staggerIn 0.25s ease-out both;
+}
+.nav-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.nav-stagger > *:nth-child(2) { animation-delay: 30ms; }
+.nav-stagger > *:nth-child(3) { animation-delay: 60ms; }
+.nav-stagger > *:nth-child(4) { animation-delay: 90ms; }
+.nav-stagger > *:nth-child(5) { animation-delay: 120ms; }
+.nav-stagger > *:nth-child(6) { animation-delay: 150ms; }
+.nav-stagger > *:nth-child(7) { animation-delay: 180ms; }
+.nav-stagger > *:nth-child(8) { animation-delay: 210ms; }
+.nav-stagger > *:nth-child(9) { animation-delay: 240ms; }
+.nav-stagger > *:nth-child(10) { animation-delay: 270ms; }
+.nav-stagger > *:nth-child(11) { animation-delay: 300ms; }
+
+/* Hover lift on nav links */
+.nav-link-lift {
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.nav-link-lift:hover {
+  transform: translateY(-1px);
+}
+
+/* ---- Hamburger → X morph animation ---- */
+.hamburger-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+.hamburger-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 22px;
+  height: 22px;
+}
+.hamburger-lines span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+  transform-origin: center;
+}
+.hamburger-lines.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-lines.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger-lines.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- Extra keyframes for smooth menu ---- */
+@keyframes fadeSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
