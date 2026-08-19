@@ -20,8 +20,8 @@ export function FormPageShell({
 }: FormPageShellProps) {
   if (success) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-12">
-        <div className="bg-gradient-to-br from-green-50 to-white border border-green-200 rounded-2xl p-12 text-center shadow-lg">
+      <div className="max-w-2xl mx-auto px-4 py-12 anim-fade-up">
+        <div className="bg-gradient-to-br from-green-50 to-white border border-green-200 rounded-2xl p-12 text-center shadow-lg anim-pop">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-10 h-10 text-green-600" />
           </div>
@@ -34,18 +34,16 @@ export function FormPageShell({
           </p>
           <a 
             href="/" 
-            className="inline-block mt-6 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+            className="inline-block mt-6 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark smooth-btn"
           >
             Back to Home
           </a>
         </div>
       </div>
     );
-  }
-
-  return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <div className="bg-white shadow-xl rounded-2xl p-6 md:p-10 border border-gray-100">
+  }    return (
+    <div className="max-w-3xl mx-auto px-4 py-8 anim-fade-up">
+      <div className="bg-white shadow-xl rounded-2xl p-6 md:p-10 border border-gray-100 anim-pop">
         <div className="flex items-center gap-3 mb-2">
           {icon && <span className="text-primary">{icon}</span>}
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800">{title}</h1>

@@ -96,7 +96,7 @@ export default function DocumentsPage() {
                   href={d.file_url || '#'}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-accent/50 transition"
+                  className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-accent/50 transition smooth-card"
                 >
                   <div className="flex items-center gap-3">
                     <FileText className="w-5 h-5 text-primary shrink-0" />

@@ -36,14 +36,14 @@ export default function BlogPage() {
             <Link
               key={post.id}
               to={`/blog/${post.slug}`}
-              className="rounded-lg overflow-hidden border border-border hover:shadow-lg transition group bg-card"
+              className="rounded-lg overflow-hidden border border-border hover:shadow-lg group bg-card smooth-card"
             >
               {post.cover_image && (
                 <img
                   src={post.cover_image}
                   alt={post.title}
                   loading="lazy"
-                  className="w-full aspect-video object-cover group-hover:scale-105 transition"
+                  className="w-full aspect-video object-cover smooth-img-zoom"
                 />
               )}
               <div className="p-4">

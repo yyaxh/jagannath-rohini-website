@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSiteContent, type BlogCard } from '@/lib/siteContent';
 import { getBlogPosts, type BlogPost } from '@/lib/api';
+import ScrollReveal from '@/components/ScrollReveal';
 
 // Shown when a blog post has no cover image.
 const FALLBACK_IMAGE = '/airo-assets/images/hero/slide-1-rath-yatra.jpg';
@@ -43,6 +44,7 @@ export default function BlogSection() {
   return (
     <section className="py-12 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
+        <ScrollReveal>
         <div className="text-center mb-4">
           <h2
             className="font-bold text-foreground mb-2"
@@ -58,18 +60,19 @@ export default function BlogSection() {
             attire…
           </p>
         </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {cards.map((post) => (
+          {cards.map((post, i) => (
+            <ScrollReveal key={post.key} className={`stagger-${i + 1}`}>
             <div
-              key={post.key}
-              className="rounded-xl overflow-hidden shadow-md bg-card border border-border flex flex-col"
+              className="rounded-xl overflow-hidden shadow-md bg-card border border-border flex flex-col smooth-card"
             >
               <div className="overflow-hidden h-48">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover smooth-img-zoom"
                   loading="lazy"
                   width={400}
                   height={250}
@@ -85,12 +88,13 @@ export default function BlogSection() {
                 <p className="text-muted-foreground text-sm leading-relaxed flex-1">{post.excerpt}</p>
                 <Link
                   to={post.href}
-                  className="mt-4 inline-block bg-primary text-primary-foreground text-sm font-semibold px-5 py-2 rounded transition hover:bg-primary/90 self-start"
+                  className="mt-4 inline-block bg-primary text-primary-foreground text-sm font-semibold px-5 py-2 rounded smooth-btn self-start"
                 >
                   Read More
                 </Link>
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

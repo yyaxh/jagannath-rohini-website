@@ -51,36 +51,191 @@
   .text-temple-dark { color: hsl(var(--temple-dark)); }
 }
 
-html { scroll-behavior: smooth; }
+/* ═══════════════════════════════════════════════
+   GLOBAL SMOOTH TRANSITIONS
+   ═══════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth page-level transitions */
+main, .anim-fade-up, .anim-fade-in, .anim-slide-in, .anim-pop {
+  animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Card hover: lift + glow ── */
+.smooth-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.smooth-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Button press micro-interaction ── */
+.smooth-btn {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s ease,
+              opacity 0.2s ease;
+}
+.smooth-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.smooth-btn:active {
+  transform: translateY(0.5px) scale(0.98);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Link underline slide animation ── */
+.smooth-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.smooth-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: hsl(var(--primary));
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.smooth-link:hover::after {
+  width: 100%;
+}
+
+/* ── Image zoom on hover ── */
+.smooth-img-zoom {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.smooth-img-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* ── Gallery image: scale + overlay ── */
+.gallery-item img {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.4s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* ── Form focus glow ── */
+input:focus, textarea:focus, select:focus {
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease,
+              transform 0.15s ease;
+}
+input:focus, textarea:focus {
+  transform: translateY(-1px);
+}
+
+/* ── Announcement slide-in ── */
+.announcement-enter {
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Quick link chips smooth ── */
+.chip-link {
+  transition: background-color 0.25s ease,
+              color 0.25s ease,
+              border-color 0.25s ease,
+              transform 0.2s ease,
+              box-shadow 0.25s ease;
+}
+.chip-link:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Social icon hover ── */
+.social-icon {
+  transition: color 0.25s ease,
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.social-icon:hover {
+  transform: translateY(-2px) scale(1.15);
+}
+
+/* ═══════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════ */
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(12px); }
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
   to { opacity: 1; transform: translateX(0); }
 }
 @keyframes popIn {
-  0% { opacity: 0; transform: scale(0.96); }
+  0% { opacity: 0; transform: scale(0.95); }
   100% { opacity: 1; transform: scale(1); }
 }
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeSlideRight {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
-.anim-fade-up { animation: fadeInUp 0.35s ease-out both; }
-.anim-fade-in { animation: fadeIn 0.3s ease-out both; }
-.anim-slide-in { animation: slideInRight 0.3s ease-out both; }
-.anim-pop { animation: popIn 0.25s ease-out both; }
+/* Scroll reveal (triggered by .revealed class) */
+@keyframes scrollRevealUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-.admin-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.anim-fade-up { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.anim-fade-in { animation: fadeIn 0.35s ease-out both; }
+.anim-fade-down { animation: fadeInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.anim-slide-in { animation: slideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.anim-slide-left { animation: slideInLeft 0.35s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.anim-pop { animation: popIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.anim-scale { animation: scaleIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+/* Stagger helpers */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════════
+   ADMIN PANEL
+   ═══════════════════════════════════════════════ */
+
+.admin-card { transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease; }
 .admin-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); }
-.admin-row { transition: background-color 0.15s ease; }
+.admin-row { transition: background-color 0.2s ease; }
 .admin-row:hover { background-color: hsl(var(--muted) / 0.7); }
 
-/* ── Navbar animations ── */
+/* ═══════════════════════════════════════════════
+   NAVBAR ANIMATIONS
+   ═══════════════════════════════════════════════ */
+
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -99,11 +254,11 @@ html { scroll-behavior: smooth; }
 }
 
 .nav-dropdown {
-  animation: slideDown 0.2s ease-out both;
+  animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
   transform-origin: top center;
 }
 .nav-mobile-menu {
-  animation: menuSlideDown 0.3s ease-out both;
+  animation: menuSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
   overflow: hidden;
 }
 .nav-mobile-menu-closing {
@@ -127,13 +282,13 @@ html { scroll-behavior: smooth; }
 
 /* Hover lift on nav links */
 .nav-link-lift {
-  transition: color 0.15s ease, transform 0.15s ease;
+  transition: color 0.2s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-link-lift:hover {
   transform: translateY(-1px);
 }
 
-/* ---- Hamburger → X morph animation ---- */
+/* Hamburger → X morph animation */
 .hamburger-icon {
   position: relative;
   width: 28px;
@@ -153,7 +308,9 @@ html { scroll-behavior: smooth; }
   height: 2px;
   background: white;
   border-radius: 1px;
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
 }
 .hamburger-lines.open span:nth-child(1) {
@@ -167,14 +324,44 @@ html { scroll-behavior: smooth; }
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ---- Extra keyframes for smooth menu ---- */
-@keyframes fadeSlideRight {
-  from {
-    opacity: 0;
-    transform: translateX(-12px);
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL (IntersectionObserver driven)
+   ═══════════════════════════════════════════════ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children inside revealed container */
+.reveal-stagger > .reveal-on-scroll:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(2) { transition-delay: 0.08s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(3) { transition-delay: 0.16s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(4) { transition-delay: 0.24s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(5) { transition-delay: 0.32s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(6) { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════
+   REDUCED MOTION (accessibility)
+   ═══════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  to {
+  .reveal-on-scroll {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
+    transition: none;
   }
 }

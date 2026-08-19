@@ -48,7 +48,7 @@ export default function LiveDarshanPage() {
         />
       </Helmet>
 
-      <main className="max-w-5xl mx-auto px-4 py-12">
+      <main className="max-w-5xl mx-auto px-4 py-12 anim-fade-up">
         <h1 className="text-3xl md:text-4xl font-heading font-bold text-temple-dark mb-2">
           Live Darshan & Aarti
         </h1>

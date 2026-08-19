@@ -31,7 +31,7 @@ export default function LiveAartiBanner() {
   if (!status?.is_live || !status.video_id) return null;
 
   return (
-    <section className="bg-temple-dark-deeper py-8 px-4">
+    <section className="bg-temple-dark-deeper py-8 px-4 anim-fade-up">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-2 mb-4">
           <span className="relative flex h-3 w-3">

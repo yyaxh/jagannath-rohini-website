@@ -117,7 +117,7 @@ export default function TempleHeader() {
             <div className="hidden lg:flex items-center gap-2">
               <Link
                 to="/donate"
-                className="bg-red-600 hover:bg-red-700 text-white text-base font-bold px-8 py-4 rounded-full shadow-sm nav-link-lift"
+                className="bg-red-600 hover:bg-red-700 text-white text-base font-bold px-8 py-4 rounded-full shadow-sm smooth-btn"
               >
                 Donate Now
               </Link>

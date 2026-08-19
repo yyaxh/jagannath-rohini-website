@@ -312,7 +312,7 @@ export default function DonatePage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-lg smooth-btn disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {loading ? (
             <>

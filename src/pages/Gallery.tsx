@@ -39,7 +39,7 @@ export default function GalleryPage() {
                 src={item.image_url}
                 alt={item.title}
                 loading="lazy"
-                className="w-full aspect-square object-cover group-hover:scale-105 transition"
+                className="w-full aspect-square object-cover smooth-img-zoom"
               />
               <p className="text-xs text-muted-foreground px-2 py-1.5 truncate">{item.title}</p>
             </div>

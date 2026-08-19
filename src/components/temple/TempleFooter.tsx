@@ -50,7 +50,7 @@ export default function TempleFooter() {
               <div>
                 <Link
                   to={`/blog/${latest.slug}`}
-                  className="text-white hover:text-primary transition font-semibold text-sm block">
+                  className="text-white hover:text-primary transition font-semibold text-sm block smooth-link">
                   {latest.title}
                 </Link>
                 {latest.excerpt && (
@@ -58,7 +58,7 @@ export default function TempleFooter() {
                 )}
                 <Link
                   to={`/blog/${latest.slug}`}
-                  className="inline-block mt-2 text-primary hover:text-primary/80 text-xs underline">
+                  className="inline-block mt-2 text-primary hover:text-primary/80 text-xs underline smooth-link">
                   Read Post →
                 </Link>
               </div>
@@ -66,7 +66,7 @@ export default function TempleFooter() {
               <div>
                 <Link
                   to="/blog"
-                  className="text-white hover:text-primary transition font-semibold text-sm">
+                  className="text-white hover:text-primary transition font-semibold text-sm smooth-link">
                   Read our Latest Posts
                 </Link>
                 <p className="text-white/50 text-xs mt-1">Stories, festivals & updates</p>
@@ -79,8 +79,7 @@ export default function TempleFooter() {
               <a
                 href="https://jagannathmandirdelhi.com/assets/message-from-puri-jagapati.pdf"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-primary hover:text-primary/80 text-xs underline">
+                rel="noopener noreferrer"                  className="inline-block text-primary hover:text-primary/80 text-xs underline smooth-link">
                 Message from Gajapati Maharaja Dibyasingha Deb ji — Download
               </a>
             </div>
@@ -104,7 +103,7 @@ export default function TempleFooter() {
               <p>{footer.address}</p>
               <p className="mt-2">
                 <span className="text-primary">Email:</span>{' '}
-                <a href={`mailto:${footer.email}`} className="hover:text-primary transition break-all">{footer.email}</a>
+                <a href={`mailto:${footer.email}`}                  className="hover:text-primary transition break-all smooth-link">{footer.email}</a>
               </p>
               {footer.email2 && (
                 <p>
@@ -113,15 +112,15 @@ export default function TempleFooter() {
               )}
               <p className="mt-2">
                 <span className="text-primary">Prasad Booking:</span>{' '}
-                <a href={`tel:+91${footer.prasadPhone}`} className="hover:text-primary transition">{footer.prasadPhone}</a>
+                <a href={`tel:+91${footer.prasadPhone}`}                  className="hover:text-primary transition smooth-link">{footer.prasadPhone}</a>
               </p>
               <p>
                 <span className="text-primary">Phone:</span>{' '}
-                <a href={`tel:${footer.phone1.replace(/-/g, '')}`} className="hover:text-primary transition">{footer.phone1}</a>
+                <a href={`tel:${footer.phone1.replace(/-/g, '')}`}                  className="hover:text-primary transition smooth-link">{footer.phone1}</a>
                 {footer.phone2 && (
                   <>
                     ,{' '}
-                    <a href={`tel:${footer.phone2.replace(/-/g, '')}`} className="hover:text-primary transition">{footer.phone2}</a>
+                    <a href={`tel:${footer.phone2.replace(/-/g, '')}`} className="hover:text-primary transition smooth-link">{footer.phone2}</a>
                   </>
                 )}
               </p>
@@ -140,7 +139,7 @@ export default function TempleFooter() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="text-xs px-3 py-1 rounded-full border border-white/20 text-white/70 hover:bg-primary hover:border-primary hover:text-primary-foreground transition">
+                  className="text-xs px-3 py-1 rounded-full border border-white/20 text-white/70 hover:bg-primary hover:border-primary hover:text-primary-foreground chip-link">
                   {link.label}
                 </Link>
               ))}
@@ -160,7 +159,7 @@ export default function TempleFooter() {
               { label: 'Disclaimer', href: '/disclaimer' },
             ].map((link, i, arr) => (
               <span key={link.label} className="flex items-center gap-3">
-                <Link to={link.href} className="hover:text-primary transition">
+                <Link to={link.href} className="hover:text-primary transition smooth-link">
                   {link.label}
                 </Link>
                 {i < arr.length - 1 && <span className="text-white/20">|</span>}
@@ -168,16 +167,16 @@ export default function TempleFooter() {
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://www.facebook.com/SreeNeelachalaSevaSangha" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary transition" aria-label="Facebook">
+            <a href="https://www.facebook.com/SreeNeelachalaSevaSangha" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary social-icon" aria-label="Facebook">
               <Facebook size={18} />
             </a>
-            <a href="https://www.instagram.com/jagannath_mandir_hauzkhas/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary transition" aria-label="Instagram">
+            <a href="https://www.instagram.com/jagannath_mandir_hauzkhas/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary social-icon" aria-label="Instagram">
               <Instagram size={18} />
             </a>
-            <a href="https://www.youtube.com/channel/UC6xwf_MaEZRyVO_wC8XtrEQ" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary transition" aria-label="YouTube">
+            <a href="https://www.youtube.com/channel/UC6xwf_MaEZRyVO_wC8XtrEQ" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary social-icon" aria-label="YouTube">
               <Youtube size={18} />
             </a>
-            <a href="https://twitter.com/home" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary transition" aria-label="Twitter">
+            <a href="https://twitter.com/home" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary social-icon" aria-label="Twitter">
               <Twitter size={18} />
             </a>
           </div>

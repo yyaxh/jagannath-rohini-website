@@ -38,7 +38,7 @@ export default function BlogPostPage() {
         {post.excerpt && <meta name="description" content={post.excerpt} />}
       </Helmet>
 
-      <main className="max-w-3xl mx-auto px-4 py-12">
+      <main className="max-w-3xl mx-auto px-4 py-12 anim-fade-up">
         <Link to="/blog" className="text-primary hover:underline text-sm mb-6 inline-block">
           ← Back to Blog
         </Link>

@@ -21,7 +21,7 @@ export default function ContentPage({ slug: propSlug }: ContentPageProps) {
   if (!page) return <NotFoundPage />;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-12 anim-fade-up">
       {/* Hero / Title Section */}
       <div className="mb-10">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">

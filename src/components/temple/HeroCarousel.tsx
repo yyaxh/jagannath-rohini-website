@@ -75,7 +75,7 @@ export default function HeroCarousel() {
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-4 px-4">
           <Link
             to="/prasad-booking"
-            className="flex items-center gap-3 bg-background rounded-lg px-6 py-3 shadow hover:shadow-md transition">
+            className="flex items-center gap-3 bg-background rounded-lg px-6 py-3 shadow smooth-card">
             
             <img
               src="/airo-assets/images/components/annaprasad-booking-tile.png"
@@ -86,7 +86,7 @@ export default function HeroCarousel() {
           </Link>
           <Link
             to="/rituals"
-            className="flex items-center gap-3 bg-background rounded-lg px-6 py-3 shadow hover:shadow-md transition">
+            className="flex items-center gap-3 bg-background rounded-lg px-6 py-3 shadow smooth-card">
             
             <img
               src="/airo-assets/images/components/temple-herocarousel/rituals-booking.png"
