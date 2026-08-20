@@ -5,7 +5,6 @@ import { useSiteContent, type FooterContent } from '@/lib/siteContent';
 import { getBlogPosts, type BlogPost } from '@/lib/api';
 
 const quickLinks = [
-  { label: 'Donate', href: '/donate' },
   { label: 'About the Temple', href: '/about-the-temple' },
   { label: 'Society Membership', href: '/membership' },
   { label: 'Dainik Sewa', href: '/seva' },
@@ -36,6 +35,26 @@ export default function TempleFooter() {
 
   return (
     <footer>
+      {/* Donate CTA bar */}
+      <div className="bg-gradient-to-r from-red-700 via-red-600 to-orange-500 py-8 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-center md:text-left">
+            <h3 className="text-white font-bold text-lg md:text-xl" style={{ fontFamily: 'var(--font-heading)' }}>
+              Support the Temple — Every Contribution Counts
+            </h3>
+            <p className="text-white/80 text-sm mt-1">
+              Your donation is eligible for 80G tax deduction. Help us serve the community.
+            </p>
+          </div>
+          <Link
+            to="/donate"
+            className="bg-white text-red-700 hover:bg-yellow-50 font-bold text-base px-10 py-4 rounded-full shadow-lg smooth-btn whitespace-nowrap"
+          >
+            🙏 Donate Now
+          </Link>
+        </div>
+      </div>
+
       {/* Main footer */}
       <div className="bg-temple-dark py-10 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
@@ -79,7 +98,7 @@ export default function TempleFooter() {
               <a
                 href="https://jagannathmandirdelhi.com/assets/message-from-puri-jagapati.pdf"
                 target="_blank"
-                rel="noopener noreferrer"                  className="inline-block text-primary hover:text-primary/80 text-xs underline smooth-link">
+                rel="noopener noreferrer" className="inline-block text-primary hover:text-primary/80 text-xs underline smooth-link">
                 Message from Gajapati Maharaja Dibyasingha Deb ji — Download
               </a>
             </div>
@@ -103,7 +122,8 @@ export default function TempleFooter() {
               <p>{footer.address}</p>
               <p className="mt-2">
                 <span className="text-primary">Email:</span>{' '}
-                <a href={`mailto:${footer.email}`}                  className="hover:text-primary transition break-all smooth-link">{footer.email}</a>
+                <a href={`mailto:${footer.email}`}
+                  className="hover:text-primary transition break-all smooth-link">{footer.email}</a>
               </p>
               {footer.email2 && (
                 <p>
@@ -112,11 +132,13 @@ export default function TempleFooter() {
               )}
               <p className="mt-2">
                 <span className="text-primary">Prasad Booking:</span>{' '}
-                <a href={`tel:+91${footer.prasadPhone}`}                  className="hover:text-primary transition smooth-link">{footer.prasadPhone}</a>
+                <a href={`tel:+91${footer.prasadPhone}`}
+                  className="hover:text-primary transition smooth-link">{footer.prasadPhone}</a>
               </p>
               <p>
                 <span className="text-primary">Phone:</span>{' '}
-                <a href={`tel:${footer.phone1.replace(/-/g, '')}`}                  className="hover:text-primary transition smooth-link">{footer.phone1}</a>
+                <a href={`tel:${footer.phone1.replace(/-/g, '')}`}
+                  className="hover:text-primary transition smooth-link">{footer.phone1}</a>
                 {footer.phone2 && (
                   <>
                     ,{' '}
@@ -143,6 +165,16 @@ export default function TempleFooter() {
                   {link.label}
                 </Link>
               ))}
+            </div>
+
+            {/* Donate chip */}
+            <div className="mt-4">
+              <Link
+                to="/donate"
+                className="inline-block text-sm font-bold px-6 py-2 rounded-full bg-primary text-white hover:bg-red-700 smooth-btn"
+              >
+                🙏 Donate
+              </Link>
             </div>
           </div>
         </div>
